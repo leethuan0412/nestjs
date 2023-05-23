@@ -1,0 +1,16 @@
+version: '3.8'
+services:  
+  dev-database:
+    image: postgres:15.0
+    container_name: dev-database
+    ports:
+      - 5434:5432 #{port in host(myPC)} : {port in Container}
+    #environment variables, like: db's username, password...
+    environment:
+      POSTGRES_USER: thuanlee
+      POSTGRES_PASSWORD: leducthuan11
+      POSTGRES_DB: testdb
+    networks:
+      - nestjs-network
+networks:
+  nestjs-network:
