@@ -22,7 +22,7 @@ export class AuthService {
       const user = await this.prismaService.user.create({
         data: {
           email: authDTO.email,
-          hashedPassword: hashPassword,
+          password: hashPassword,
           firstName: authDTO.firstName,
           lastName: authDTO.lastName,
         },
@@ -52,14 +52,11 @@ export class AuthService {
     if (!user) {
       throw new ForbiddenException('user not found');
     }
-    const hashedPassword = await agron.verify(
-      user.hashedPassword,
-      authDTO.password,
-    );
+    const hashedPassword = await agron.verify(user.password, authDTO.password);
     if (!hashedPassword) {
       throw new ForbiddenException('password incorrect');
     }
-    delete user.hashedPassword; // khong hien thi
+    delete user.password; // khong hien thi
     return await this.signJwtToken(
       user.id,
       user.email,
