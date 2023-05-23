@@ -24,7 +24,7 @@ model User {
 }
 
 model Note {
-  id          Int      @id
+  id          Int      @id @default(autoincrement())
   title       String
   description String
   url         String
