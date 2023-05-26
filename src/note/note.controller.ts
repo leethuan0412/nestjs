@@ -45,6 +45,8 @@ export class NoteController {
     @Param('id', ParseIntPipe) noteId: number,
     @Body() updateNote: UpDateNote,
   ) {
+    console.log(noteId, 'noteId');
+
     return this.noteService.updateNoteById(noteId, updateNote);
   }
 

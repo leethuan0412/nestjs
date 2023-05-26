@@ -23,8 +23,9 @@ export class AuthService {
         data: {
           email: authDTO.email,
           password: hashPassword,
-          firstName: authDTO.firstName,
-          lastName: authDTO.lastName,
+          firstName: '',
+          lastName: '',
+          avatar: '',
         },
         // hien thi truong nao thi true
         select: {
@@ -33,6 +34,7 @@ export class AuthService {
           createAt: true,
           firstName: true,
           lastName: true,
+          avatar: true,
         },
       });
       return await this.signJwtToken(user.id, user.email);

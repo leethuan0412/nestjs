@@ -19,6 +19,7 @@ model User {
   createAt  DateTime @default(now())
   updateAt  DateTime @updatedAt
   notes     Note[] // mot nguoi nhieu note
+  avatar    String?
 
   @@map("users") // ten bang trong database
 }
