@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   MaxFileSizeValidator,
   Param,
@@ -70,5 +71,11 @@ export class UserController {
     @UploadedFile() @Body() updateInfor: UpdateInfor,
   ) {
     return this.userService.updateProfile(user, updateInfor);
+  }
+
+  @Delete('/delete')
+  @UseGuards(MyJwtGuard)
+  deleteAccount(@GetUser() user: User) {
+    return this.userService.deleteAccount(user);
   }
 }

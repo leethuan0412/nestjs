@@ -98,4 +98,27 @@ export class AuthService {
       console.log(err);
     }
   }
+
+  loginGoogle(req: { user: any }) {
+    console.log(req, 'req');
+
+    if (!req.user) {
+      return 'No user from google';
+    }
+
+    return {
+      message: 'User information from google',
+      user: req.user,
+    };
+  }
+  /*
+  async loginGoogle(user: any) {
+    const payload = { username: user.username, sub: user.userId };
+    console.log(user, 'user');
+
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+   */
 }

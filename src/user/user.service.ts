@@ -6,11 +6,16 @@ import { UpdateInfor } from './validate/update.user.dto';
 @Injectable({})
 export class UserService {
   constructor(private prismaService: PrismaService) {}
-  async updateProfile(user: User, updateInfor: UpdateInfor) {
-    console.log(user, 'userrrr');
-
+  updateProfile(user: User, updateInfor: UpdateInfor) {
     return this.prismaService.user.update({
       data: { ...updateInfor },
+      where: {
+        id: user.id,
+      },
+    });
+  }
+  deleteAccount(user: User) {
+    return this.prismaService.user.delete({
       where: {
         id: user.id,
       },
