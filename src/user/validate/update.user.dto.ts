@@ -17,3 +17,14 @@ export class UpdateInfor {
   @IsOptional()
   avatar?: string;
 }
+
+export class ChangePassword {
+  @IsString()
+  old_password?: string;
+
+  @IsString()
+  new_password?: string;
+
+  @IsString()
+  confirmPassword?: string;
+}

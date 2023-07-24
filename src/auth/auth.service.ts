@@ -55,6 +55,10 @@ export class AuthService {
       throw new ForbiddenException('user not found');
     }
     const hashedPassword = await agron.verify(user.password, authDTO.password);
+    console.log(user.password);
+    console.log('-------');
+    console.log(authDTO.password);
+
     if (!hashedPassword) {
       throw new ForbiddenException('password incorrect');
     }

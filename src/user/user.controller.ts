@@ -3,27 +3,22 @@ import {
   Controller,
   Delete,
   Get,
-  MaxFileSizeValidator,
   Param,
-  ParseFilePipe,
-  Patch,
   Post,
   Put,
   Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
-  ValidationPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { User } from '@prisma/client';
-import { Request } from 'express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { GetUser } from 'src/auth/decorator/user.decorator';
 import { MyJwtGuard } from 'src/auth/guard/myjwt.guard';
 import { UserService } from './user.service';
-import { UpdateInfor } from './validate/update.user.dto';
+import { ChangePassword, UpdateInfor } from './validate/update.user.dto';
 
 @Controller('users')
 export class UserController {
@@ -77,5 +72,11 @@ export class UserController {
   @UseGuards(MyJwtGuard)
   deleteAccount(@GetUser() user: User) {
     return this.userService.deleteAccount(user);
+  }
+
+  @Post('/changepassword')
+  @UseGuards(MyJwtGuard)
+  changePassword(@GetUser() user: User, @Body() body: ChangePassword) {
+    return this.userService.changePassword(user, body);
   }
 }
