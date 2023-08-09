@@ -8,6 +8,17 @@ export class AuthDTO {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsString()
+  @IsOptional()
+  firstName: string;
+
+  @IsString()
+  @IsOptional()
+  lastName: string;
+
+  @IsOptional()
+  avatar: any;
 }
 export class AuthLogin {
   @IsEmail()

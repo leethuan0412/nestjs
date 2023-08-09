@@ -23,9 +23,9 @@ export class AuthService {
         data: {
           email: authDTO.email,
           password: hashPassword,
-          firstName: '',
-          lastName: '',
-          avatar: '',
+          firstName: authDTO.firstName,
+          lastName: authDTO.lastName,
+          avatar: authDTO.avatar,
         },
         // hien thi truong nao thi true
         select: {
@@ -66,23 +66,23 @@ export class AuthService {
     return await this.signJwtToken(
       user.id,
       user.email,
-      // user.firstName,
-      // user.lastName,
+      user.firstName,
+      user.lastName,
     );
   }
 
   async signJwtToken(
     userId?: number,
     email?: string,
-    // firstName?: string,
-    // lastName?: string,
+    firstName?: string,
+    lastName?: string,
   ): Promise<{ accessToken: string; user?: {} }> {
     try {
       const payload = {
         sub: userId,
         email,
-        // firstName,
-        // lastName,
+        firstName,
+        lastName,
       };
       const jwtString = await this.jwtService.signAsync(payload, {
         expiresIn: '10m', // time
@@ -90,12 +90,12 @@ export class AuthService {
       });
       return {
         //co the them vao
-        // user: {
-        //   id: userId,
-        //   email: email,
-        //   firstName: firstName,
-        //   lastName: lastName,
-        // },
+        user: {
+          id: userId,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+        },
         accessToken: jwtString,
       };
     } catch (err) {
